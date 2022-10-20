@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
 
-function App() {
+const App = () => {
+  const [color, setColor] = useState("black");
+
+  useEffect(() => {
+    const changeColorOnClick = () => {
+      if (color === "black") {
+        setColor("red");
+      } else {
+        setColor("black");
+      }
+    };
+
+    document.addEventListener("click", changeColorOnClick);
+
+    return () => {
+      document.removeEventListener("click", changeColorOnClick);
+    };
+  }, [color]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div
+        id="myDiv"
+        style={{
+          color: "white",
+          width: "100px",
+          height: "100px",
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          backgroundColor: color,
+        }}
+      >
+        This div can change color. Click on me!
+      </div>
     </div>
   );
-}
+};
 
 export default App;
