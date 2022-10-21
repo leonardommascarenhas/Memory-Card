@@ -19,7 +19,6 @@ const Card = () => {
 
   return (
     <>
-      <button onClick={apiRequest}></button>
       <div className="dogCard">
         {dogImage && (
           <img className="dogImage" src={dogImage} alt="doggo"></img>

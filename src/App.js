@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Card from "./components/Card/Card";
+import Body from "./modules/Home/Body/Body";
 import "./";
 
 const App = () => {
   return (
     <>
-      <Card />
+      <Body />
     </>
   );
 };
