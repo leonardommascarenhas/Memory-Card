@@ -1,41 +1,32 @@
 import React, { useState, useEffect } from "react";
+import "./";
 
 const App = () => {
-  const [color, setColor] = useState("black");
-
+  const [dogImage, setdogImage] = useState(null);
+  const [dogBreed, setDogBreed] = useState(null);
+  function apiRequest() {
+    fetch(`https://dog.ceo/api/breeds/image/random`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setdogImage(data.message);
+        let breed = data.message.split("/")[4];
+        console.log(breed);
+      });
+  }
   useEffect(() => {
-    const changeColorOnClick = () => {
-      if (color === "black") {
-        setColor("red");
-      } else {
-        setColor("black");
-      }
-    };
-
-    document.addEventListener("click", changeColorOnClick);
-
-    return () => {
-      document.removeEventListener("click", changeColorOnClick);
-    };
-  }, [color]);
+    apiRequest();
+  }, []);
 
   return (
-    <div>
-      <div
-        id="myDiv"
-        style={{
-          color: "white",
-          width: "100px",
-          height: "100px",
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          backgroundColor: color,
-        }}
-      >
-        This div can change color. Click on me!
+    <>
+      <button onClick={apiRequest}></button>
+      <div className="dog">
+        {dogImage && (
+          <img className="dogImage" src={dogImage} alt="doggo"></img>
+        )}
       </div>
-    </div>
+    </>
   );
 };
 
