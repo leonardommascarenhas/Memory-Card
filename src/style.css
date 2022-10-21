@@ -1,4 +1,9 @@
-button{
-    width: 300px;
-    height: 200px
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: blue;
 }
