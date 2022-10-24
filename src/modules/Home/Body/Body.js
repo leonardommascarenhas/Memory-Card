@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Card from "../../../components/Card/Card";
+import React from "react";
 import GameBoard from "../../../components/GameBoard/GameBoard";
 const Body = () => {
   return (
