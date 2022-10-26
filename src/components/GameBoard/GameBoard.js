@@ -26,10 +26,12 @@ const GameBoard = () => {
   }
 
   useEffect(() => {
-    apiRequest();
-    console.log(order);
     checkWin();
   }, [score]);
+
+  useEffect(() => {
+    apiRequest();
+  }, []);
 
   function handleClick() {
     setScore(score + 1);
