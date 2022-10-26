@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Body from "./modules/Home/Body/Body";
-import "./";
+import Header from "./modules/Home/Header/Header";
 
 const App = () => {
   return (
     <>
+      <Header />
       <Body />
     </>
   );
