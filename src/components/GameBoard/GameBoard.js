@@ -5,7 +5,7 @@ import uniqid from "uniqid";
 import { AuthContext } from "../../providers/auth";
 
 const GameBoard = () => {
-  const [dogObj, setDog] = useState([]);
+  const [scored, setScored] = useState([]);
   const [order, setOrder] = useState([]);
   const { score, setScore } = React.useContext(AuthContext);
 
@@ -18,7 +18,6 @@ const GameBoard = () => {
         .then((data) => {
           let breed = data.message.split("/")[4];
           let obj = { BreedDog: breed, imgSrc: data.message, id: uniqid() };
-          setDog((current) => [...current, obj]);
           setOrder((current) => [...current, obj]);
         });
     }
@@ -26,27 +25,22 @@ const GameBoard = () => {
   }
 
   useEffect(() => {
-    checkWin();
+    if (score % 8 == 0) {
+      console.log("win");
+      setOrder([]);
+      apiRequest();
+    }
   }, [score]);
 
   useEffect(() => {
     apiRequest();
   }, []);
 
-  function handleClick() {
+  function handleClick(e) {
     setScore(score + 1);
     const nextOrder = [...order];
     nextOrder.sort(() => Math.random() - 0.5);
     setOrder(nextOrder);
-  }
-  function checkWin() {
-    if (score >= 8) {
-      console.log("win");
-      setOrder([]);
-      setDog([]);
-      setScore(0);
-      apiRequest();
-    }
   }
 
   return (
