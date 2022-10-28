@@ -30,6 +30,7 @@ const GameBoard = () => {
     if (score % 8 == 0 && score > 0) {
       console.log("win");
       setOrder([]);
+      setScored([]);
       apiRequest();
       setScore(0);
     }
@@ -40,21 +41,45 @@ const GameBoard = () => {
   }, []);
 
   useEffect(() => {
-    if (scored.includes(check)) {
-      return console.log("fail");
+    console.log(check);
+    if (scored.includes(check) == true) {
+      fail();
     } else {
-      console.log(scored);
-      setScored((current) => [...current, check]);
       setScore((current) => current + 1);
+      setScored((current) => [...current, check]);
     }
   }, [check]);
 
+  useEffect(() => {
+    console.log(scored);
+  }, [scored]);
+
+  useEffect(() => {
+    setScore(0);
+  }, []);
+
   function handleClick(e) {
     let getDogBreed = e.target.src.split("/")[4];
+    if (getDogBreed == scored[scored.length - 1]) {
+      return fail();
+    }
     setCheck(getDogBreed);
+    console.log(check);
+    newOrder();
+  }
+
+  function newOrder() {
     const nextOrder = [...order];
     nextOrder.sort(() => Math.random() - 0.5);
     setOrder(nextOrder);
+  }
+
+  function fail() {
+    console.log("fail");
+    setScore(0);
+    setOrder([]);
+    setOrder([]);
+    apiRequest();
   }
 
   return (
